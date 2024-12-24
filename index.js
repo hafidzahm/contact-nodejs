@@ -1,13 +1,11 @@
 const readline = require("readline");
 const fs = require("fs")
 const { stdin: input, stdout: output } = require('node:process');
-const { dir } = require("console");
 
 const rl = readline.createInterface({ input, output });
-const contactMemory = []
 
 
-
+//bikim template pertanyaan
 const questionTemplate = (question) => {
    return new Promise((resolve, reject) => {
         rl.question(question, (answer) => {
