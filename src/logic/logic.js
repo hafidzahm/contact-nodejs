@@ -1,5 +1,6 @@
 const fs = require("fs")
 const chalk = require("chalk")
+const validator = require("validator")
 
 const saveData = (nama, email, noHP) => {
     const contact = {nama, email, noHP}
@@ -12,6 +13,16 @@ const saveData = (nama, email, noHP) => {
     if (duplicateData) {
         console.log(chalk.red.inverse.bold("Kontak sudah terdaftar"))
     return false
+    }
+
+    //email validator
+    if (email) {
+        if(!validator.isEmail(email)) {
+            console.log(
+                chalk.red.inverse.bold("Email tidak valid!")
+            );
+            return false
+        }
     }
 
 
