@@ -1,4 +1,5 @@
 const fs = require("fs")
+const chalk = require("chalk")
 
 const saveData = (nama, email, noHP) => {
     const contact = {nama, email, noHP}
@@ -9,7 +10,7 @@ const saveData = (nama, email, noHP) => {
     //verify-first
     const duplicateData = contacts.find((contact) => contact.nama === nama)
     if (duplicateData) {
-        console.log("Kontak sudah terdaftar")
+        console.log(chalk.red.inverse.bold("Kontak sudah terdaftar"))
     return false
     }
 
