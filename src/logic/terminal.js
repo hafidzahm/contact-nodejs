@@ -33,7 +33,7 @@ const terminal = () => {
     
             saveData(argv.nama, argv.email, argv.noHP)
         }
-    })
+    }).demandCommand();
     
     yargs.parse()
 
