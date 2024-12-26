@@ -38,7 +38,7 @@ const saveData = (nama, email, noHP) => {
     contacts.push(contact)
     fs.writeFileSync('./data/contacts.json', JSON.stringify(contacts))
 
-    console.log("Terima kasih sudah menyimpan kontak")
+    console.log(chalk.green.inverse.bold(`Kontak dengan nama ${nama} tersimpan!`))
 
 }
 
