@@ -1,7 +1,4 @@
 const fs = require("fs")
-const readline = require("readline");
-const { stdin: input, stdout: output } = require('node:process');
-const rl = readline.createInterface({ input, output });
 
 const saveData = (nama, email, noHP) => {
     const contact = {nama, email, noHP}
@@ -9,12 +6,19 @@ const saveData = (nama, email, noHP) => {
 
     const contacts = JSON.parse(fileBuffer)
 
+    //verify-first
+    const duplicateData = contacts.find((contact) => contact.nama === nama)
+    if (duplicateData) {
+        console.log("Kontak sudah terdaftar")
+    return false
+    }
+
+
     contacts.push(contact)
     fs.writeFileSync('./data/contacts.json', JSON.stringify(contacts))
 
     console.log("Terima kasih sudah menyimpan kontak")
 
-    rl.close()
 }
 
 module.exports = {saveData}
