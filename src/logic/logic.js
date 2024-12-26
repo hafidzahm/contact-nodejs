@@ -1,6 +1,8 @@
 const fs = require("fs")
 const chalk = require("chalk")
 const validator = require("validator")
+const yargs = require("yargs")
+const { type } = require("os")
 
 const loadContact = () => {
     const fileBuffer = fs.readFileSync('data/contacts.json', 'utf-8')
@@ -59,4 +61,22 @@ const listContact = () => {
 
 }
 
-module.exports = {saveData, loadContact, listContact}
+const detailContact = (nama) => {
+    const contacts = loadContact();
+
+    const contactFind = contacts.find((contact) => contact.nama.toLowerCase() === nama.toLowerCase())
+
+
+    if (!contactFind) {
+        console.log(chalk.red.inverse.bold(`Kontak dengan nama "${nama}" tidak ditemukan!`))
+        return false
+    }
+
+    console.log(chalk.cyan.inverse.bold(`Kontak dengan nama "${nama}" ditemukan!`))
+    console.log(chalk.cyan.inverse.bold(contactFind.noHP))
+    if (contactFind.email) {
+        console.log(chalk.cyan.inverse.bold(contactFind.email))
+    }
+}
+
+module.exports = {saveData, loadContact, listContact, detailContact}
