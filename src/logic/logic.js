@@ -25,6 +25,15 @@ const saveData = (nama, email, noHP) => {
         }
     }
 
+    // number validator
+    if(!validator.isMobilePhone(noHP, "id-ID")) {
+        console.log(
+            chalk.red.inverse.bold("Nomor handphone tidak valid!")
+        );
+        return false
+    }
+
+
 
     contacts.push(contact)
     fs.writeFileSync('./data/contacts.json', JSON.stringify(contacts))
