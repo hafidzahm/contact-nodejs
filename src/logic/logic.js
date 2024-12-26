@@ -1,8 +1,6 @@
 const fs = require("fs")
 const chalk = require("chalk")
 const validator = require("validator")
-const yargs = require("yargs")
-const { type } = require("os")
 
 const loadContact = () => {
     const fileBuffer = fs.readFileSync('data/contacts.json', 'utf-8')
@@ -79,4 +77,21 @@ const detailContact = (nama) => {
     }
 }
 
-module.exports = {saveData, loadContact, listContact, detailContact}
+const deleteContact = (nama) => {
+    //array lama
+    const contacts = loadContact();
+    //array baru setelah kontak dihapus
+    const filteredContact = contacts.filter((contact) => contact.nama.toLowerCase() !== nama.toLowerCase())
+
+    if(contacts.length === filteredContact.length) {
+        console.log(chalk.red.inverse.bold(`Kontak dengan nama "${nama}" tidak ditemukan!`))
+        return false
+    }
+
+    //tulis array baru
+    fs.writeFileSync('data/contacts.json', JSON.stringify(filteredContact))
+    console.log(chalk.green.inverse.bold(`Kontak dengan nama "${nama}" berhasil dihapus!`))
+
+}
+
+module.exports = {saveData, loadContact, listContact, detailContact, deleteContact}

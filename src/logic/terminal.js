@@ -1,5 +1,5 @@
 const yargs = require("yargs");
-const { saveData, listContact, detailContact } = require("./logic");
+const { saveData, listContact, detailContact, deleteContact } = require("./logic");
 const { pathLogic } = require("./path");
 
 
@@ -62,6 +62,23 @@ const terminal = () => {
 
         handler(argv) {
             detailContact(argv.nama)
+        }
+    })
+
+    //menghapus kontak berdasarkan nama
+    yargs.command({
+        command: "remove",
+        describe: "Menghapus sebuah kontak berdasarkan nama",
+        builder: {
+            nama: {
+                describe: "Nama lengkap",
+                demandOption: true,
+                type:"string"
+            },
+        },
+
+        handler(argv) {
+            deleteContact(argv.nama)
         }
     })
     
