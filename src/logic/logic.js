@@ -2,11 +2,19 @@ const fs = require("fs")
 const chalk = require("chalk")
 const validator = require("validator")
 
+const loadContact = () => {
+    const fileBuffer = fs.readFileSync('data/contacts.json', 'utf-8')
+const contacts = JSON.parse(fileBuffer)
+return contacts
+
+}
+
+
+
 const saveData = (nama, email, noHP) => {
     const contact = {nama, email, noHP}
-    const fileBuffer = fs.readFileSync('data/contacts.json', 'utf-8')
+    const contacts = loadContact()
 
-    const contacts = JSON.parse(fileBuffer)
 
     //verify-first
     const duplicateData = contacts.find((contact) => contact.nama === nama)
@@ -42,4 +50,13 @@ const saveData = (nama, email, noHP) => {
 
 }
 
-module.exports = {saveData}
+const listContact = () => {
+    const contacts = loadContact()
+    console.log(chalk.cyan.inverse.bold("Daftar Kontak: "))
+    contacts.forEach((contact, index) => {
+        console.log(`${index + 1}. ${contact.nama} - ${contact.noHP}`)
+    })
+
+}
+
+module.exports = {saveData, loadContact, listContact}

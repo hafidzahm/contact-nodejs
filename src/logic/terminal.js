@@ -1,6 +1,8 @@
 const yargs = require("yargs");
 const { saveData } = require("./logic");
 const { pathLogic } = require("./path");
+const {listContact} = require("./logic")
+
 
 const terminal = () => {
     pathLogic()
@@ -34,6 +36,15 @@ const terminal = () => {
             saveData(argv.nama, argv.email, argv.noHP)
         }
     }).demandCommand();
+
+    //menampilkan list kontak (nama dan nomor telpon)
+    yargs.command({
+        command: "list",
+        describe: "Tampilkan nama dan nomor handphone",
+        handler() {
+            listContact()
+        }
+    })
     
     yargs.parse()
 
